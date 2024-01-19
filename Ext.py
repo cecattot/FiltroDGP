@@ -58,7 +58,7 @@ time.sleep(15)
 
 with open('dados_grupos.csv', 'w', newline='', encoding='utf-8') as csvfile:
     csv_writer = csv.writer(csvfile)
-    csv_writer.writerow(['Nome do Grupo', 'Link do Grupo', 'Nome do Líder', 'Nome do Segundo Líder', 'Área', 'Situação', 'Data', 'Campus', 'E-mail', 'Equipe'])
+    csv_writer.writerow(['Nome do Grupo', 'Link do Grupo', 'Nome do Líder', 'Nome do Segundo Líder', 'Área', 'Situação', 'Criação', 'Atualização', 'Campus', 'E-mail', 'Equipe', 'Pesquisadores', 'TAES', 'Estudantes', 'Estrangeiros'])
 
     elements_xpath = '//*[@id="idFormConsultaParametrizada:resultadoDataList_list"]/li'
     elements = driver.find_elements(By.XPATH, elements_xpath)
@@ -81,12 +81,13 @@ with open('dados_grupos.csv', 'w', newline='', encoding='utf-8') as csvfile:
             # Usando ação de rolagem para o elemento
             actions = ActionChains(driver)
             actions.move_to_element(element.find_element(By.XPATH, './/div[@class="itemConsulta"]/div[5]/div')).perform()
-            time.sleep(3)
+            time.sleep(5)
             WebDriverWait(driver, 20000).until(EC.element_to_be_clickable(nome_grupo_element)).click()
             driver.switch_to.window(driver.window_handles[1])
             link_grupo = driver.current_url
+            criacao = driver.find_element(By.XPATH, '/html/body/div[3]/div/div/div/div/div[2]/form/div/div[4]/span[1]/div/fieldset/div[2]/div').text
             situacao = driver.find_element(By.XPATH, '/html/body/div[3]/div/div/div/div/div[2]/form/div/div[4]/span[1]/div/fieldset/div[1]/div').text
-            data = driver.find_element(By.XPATH, '/html/body/div[3]/div/div/div/div/div[2]/form/div/div[4]/span[1]/div/fieldset/div[4]/div').text
+            atualizacao = driver.find_element(By.XPATH, '/html/body/div[3]/div/div/div/div/div[2]/form/div/div[4]/span[1]/div/fieldset/div[4]/div').text
             try:
                 campus = driver.find_element(By.XPATH, '/html/body/div[3]/div/div/div/div/div[2]/form/div/div[4]/span[1]/div/fieldset/div[8]/div').text
             except:
@@ -95,14 +96,24 @@ with open('dados_grupos.csv', 'w', newline='', encoding='utf-8') as csvfile:
                 email = driver.find_element(By.XPATH, '/html/body/div[3]/div/div/div/div/div[2]/form/div/div[4]/span[2]/div/fieldset/div[13]/div/a').text
             except:
                 email = ''
+
             equipe_xpath = '//*[@id="indicadores"]'
             equipe =  driver.find_element(By.XPATH, equipe_xpath).get_attribute("outerHTML")
+            pesquisadores_xpath = '//*[@id="idFormVisualizarGrupoPesquisa:j_idt271"]'
+            pesquisadores =  driver.find_element(By.XPATH, pesquisadores_xpath).get_attribute("outerHTML")
+            estudantes_xpath = '//*[@id="idFormVisualizarGrupoPesquisa:j_idt288"]'
+            estudantes =  driver.find_element(By.XPATH, estudantes_xpath).get_attribute("outerHTML")
+            taes_xpath = '//*[@id="idFormVisualizarGrupoPesquisa:j_idt305"]'
+            taes =  driver.find_element(By.XPATH, taes_xpath).get_attribute("outerHTML")
+            col_xpath = '//*[@id="idFormVisualizarGrupoPesquisa:j_idt322"]'
+            col =  driver.find_element(By.XPATH, col_xpath).get_attribute("outerHTML")
+
             driver.close()
             time.sleep(5)
             driver.switch_to.window(driver.window_handles[0])
 
             csv_writer.writerow(
-                [nome_grupo, link_grupo, nome_lider, nome_segundo_lider, area, situacao, data, campus, email, equipe])
+                [nome_grupo, link_grupo, nome_lider, nome_segundo_lider, area, situacao, criacao, atualizacao, campus, email, equipe, pesquisadores, estudantes, taes, col])
             print(nome_grupo)
         finally:
             print("#")
