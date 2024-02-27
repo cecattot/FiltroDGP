@@ -5,6 +5,7 @@ import roman
 
 df = pd.read_csv('pesquisadores.csv')
 dfGrupos = pd.read_csv('dados_grupos.csv')
+
 # Mapeamento de cores para cada tipo de pesquisador
 cores = {
     "Pesquisador": "blue",

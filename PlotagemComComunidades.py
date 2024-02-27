@@ -36,11 +36,17 @@ for grupo_id, vertice_id in grupo_para_vertice.items():
     tamanho_grupo = pesquisadores_por_grupo[grupo_id]
     grafo.add_vertex(name=str(grupo_id), label=algarismos_romanos[vertice_id], size=tamanho_grupo)
 
-# Adicionar arestas entre os grupos que compartilham pesquisadores com cores correspondentes
+# Criar um conjunto de pares de grupos que compartilham pesquisadores
+pares_de_grupos_compartilhados = set()
 for pesquisador in grupos_por_pesquisadores.values():
     if len(pesquisador) > 1:
         for par in combinations(pesquisador, 2):
-            grafo.add_edge(str(par[0][0]), str(par[1][0]), color=cores[par[0][1]])
+            pares_de_grupos_compartilhados.add(par)
+
+# Adicionar arestas entre os grupos que compartilham pesquisadores com cores correspondentes
+for grupo1, grupo2 in pares_de_grupos_compartilhados:
+    grafo.add_edge(str(grupo1[0]), str(grupo2[0]), color=cores[grupo1[1]])
+
 
 # Adicionar atributo "Campus" aos vértices
 for index, row in dfGrupos.iterrows():
