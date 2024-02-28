@@ -1,0 +1,81 @@
+vertex ID,label,size,name,campus,color
+0,I,10,5772,Campus Cuiabá,#8c8069
+1,II,16,15948,Campus Cuiabá,#8c8069
+2,III,3,22708,Campus São Vicente,#6ac46b
+3,IV,27,28509,Campus São Vicente,#6ac46b
+4,V,48,30978,Instituto Federal de Mato Grosso - Campus Bela Vista,#c9d20f
+5,VI,19,31023,,gray
+6,VII,12,34123,Campus Cuiabá,#8c8069
+7,VIII,15,36214,Campus Cáceres,#813f91
+8,IX,4,41555,Reitoria,#853c0c
+9,X,18,60132,Campus Cuiabá,#8c8069
+10,XI,36,64447,Instituto Federal de Mato Grosso - Campus Confresa,#2b65bb
+11,XII,19,73145,Instituto Federal de Mato Grosso - Campus Bela Vista,#c9d20f
+12,XIII,38,176899,Instituto Federal de Mato Grosso - Campus Sorriso,#5cf882
+13,XIV,12,181836,Campus Cuiabá,#8c8069
+14,XV,26,188517,Campus Cuiabá,#8c8069
+15,XVI,25,200443,Instituto Federal de Mato Grosso - Campus Confresa,#2b65bb
+16,XVII,15,213084,Campus Cuiabá,#8c8069
+17,XVIII,21,215986,Campus Cuiabá,#8c8069
+18,XIX,11,235600,Campus Rondonópolis,#2f33da
+19,XX,8,269283,Campus Rondonópolis,#2f33da
+20,XXI,25,283504,Instituto Federal de Mato Grosso - Campus Confresa,#2b65bb
+21,XXII,4,286824,Instituto Federal de Mato Grosso - Campus Primavera do Leste,#047f2f
+22,XXIII,20,318005,Campus São Vicente,#6ac46b
+23,XXIV,25,322907,Campus Juína,#5d9291
+24,XXV,12,326827,IFMT Campus Varze Grande,gray
+25,XXVI,13,331467,Instituto Federal de Mato Grosso - Campus Confresa,#2b65bb
+26,XXVII,11,368150,Campus Cuiabá,#8c8069
+27,XXVIII,43,386272,Campus Cuiabá,#8c8069
+28,XXIX,22,387971,IFMT Campus Varze Grande,gray
+29,XXX,26,388031,Campus Cuiabá,#8c8069
+30,XXXI,25,388591,Campus Cuiabá,#8c8069
+31,XXXII,8,464497,,gray
+32,XXXIII,10,464738,Instituto Federal de Mato Grosso - Campus Bela Vista,#c9d20f
+33,XXXIV,30,500897,Campus São Vicente,#6ac46b
+34,XXXV,13,529979,Campus Cuiabá,#8c8069
+35,XXXVI,18,554001,,gray
+36,XXXVII,12,595626,Campus São Vicente,#6ac46b
+37,XXXVIII,12,596326,Campus Campo Novo do Parecis,#daaa86
+38,XXXIX,30,612507,Instituto Federal de Mato Grosso - Campus Bela Vista,#c9d20f
+39,XL,10,613306,Campus Cuiabá,#8c8069
+40,XLI,15,613707,,gray
+41,XLII,13,618846,Campus Cuiabá,#8c8069
+42,XLIII,19,621826,Campus Cuiabá,#8c8069
+43,XLIV,10,631708,Campus Cuiabá,#8c8069
+44,XLV,25,638107,,gray
+45,XLVI,28,678733,Instituto Federal de Mato Grosso - Campus Pontes e Lacerda,#83d4da
+46,XLVII,23,708213,Campus Cuiabá,#8c8069
+47,XLVIII,27,746315,Campus Juína,#5d9291
+48,XLIX,12,750395,Instituto Federal de Mato Grosso - Campus Bela Vista,#c9d20f
+49,L,24,755062,,gray
+50,LI,20,755139,Campus Cuiabá,#8c8069
+51,LII,29,755164,Instituto Federal de Mato Grosso - Campus Primavera do Leste,#047f2f
+52,LIII,12,766351,Campus Campo Novo do Parecis,#daaa86
+53,LIV,5,769364,IFMT Campus Varze Grande,gray
+54,LV,9,769950,,gray
+55,LVI,15,772154,Instituto Federal de Mato Grosso - Campus Pontes e Lacerda,#83d4da
+56,LVII,18,772776,Campus Cuiabá,#8c8069
+57,LVIII,16,772884,,gray
+58,LIX,20,773418,"INSTITUTO FEDERAL DE EDUCAÇÃO, CIÊNCIA E TECNOLOGIA DE MATO GROSSO",#dd1fad
+59,LX,9,773436,Instituto Federal de Mato Grosso - Campus Pontes e Lacerda,#83d4da
+60,LXI,16,774689,,gray
+61,LXII,39,776901,Campus Barra do Garças,#b89951
+62,LXIII,11,777576,Campus Cuiabá,#8c8069
+63,LXIV,9,778914,Campus Cáceres,#813f91
+64,LXV,19,780126,IFMT Campus Alta Floresta,#f9d732
+65,LXVI,15,780322,,gray
+66,LXVII,14,781782,Instituto Federal de Mato Grosso - Campus Primavera do Leste,#047f2f
+67,LXVIII,10,785538,,gray
+68,LXIX,7,786227,Campus Cuiabá,#8c8069
+69,LXX,7,786882,Campus Juína,#5d9291
+70,LXXI,12,786916,"INSTITUTO FEDERAL DE EDUCAÇÃO, CIÊNCIA E TECNOLOGIA DE MATO GROSSO",#dd1fad
+71,LXXII,4,787317,Campus Cuiabá,#8c8069
+72,LXXIII,5,787635,Reitoria,#853c0c
+73,LXXIV,8,787937,Instituto Federal de Mato Grosso - Campus Confresa,#2b65bb
+74,LXXV,6,788531,Instituto Federal de Mato Grosso - Campus Sorriso,#5cf882
+75,LXXVI,8,790261,Reitoria,#853c0c
+76,LXXVII,9,790561,,gray
+77,LXXVIII,17,793603,Instituto Federal de Mato Grosso - Campus Sorriso,#5cf882
+78,LXXIX,5,796376,Campus Cuiabá,#8c8069
+79,LXXX,13,799063,Reitoria,#853c0c

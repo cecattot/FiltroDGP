@@ -35,7 +35,6 @@ algarismos_romanos = [roman.toRoman(i+1) for i in range(len(grupo_para_vertice))
 for grupo_id, vertice_id in grupo_para_vertice.items():
     tamanho_grupo = pesquisadores_por_grupo[grupo_id]
     grafo.add_vertex(name=str(grupo_id), label=algarismos_romanos[vertice_id], size=tamanho_grupo)
-
 # Criar um conjunto de pares de grupos que compartilham pesquisadores
 pares_de_grupos_compartilhados = set()
 for pesquisador in grupos_por_pesquisadores.values():
@@ -55,8 +54,6 @@ for index, row in dfGrupos.iterrows():
     vertice = grafo.vs.find(name=str(grupo_id))
     vertice['campus'] = campus
 
-# Detectar comunidades com base na conexão dos vértices
-comunidades = grafo.community_multilevel()
 
 # Definir cores aleatórias para os demais campi
 cores_comunidades = {
@@ -78,22 +75,43 @@ cores_comunidades = {
     "Reitoria": "#{:02x}{:02x}{:02x}".format(random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
 }
 
-
 # Definir cor dos vértices de acordo com a comunidade
 for vertice in grafo.vs:
     campus = vertice['campus']
     cor = cores_comunidades.get(campus, "gray")
     vertice["color"] = cor
 
+# Detectar comunidades com base na conexão dos vértices
+comunidades = grafo.community_multilevel(weights=None, return_levels=False)
+
 # Definir visualização do grafo
 visual_style = {
     "vertex_size": grafo.vs["size"],
-    "layout": "kk",
+    "layout": "fr",
     "bbox": (1600, 1600),
-    "margin": 20,
+    "margin": 40,
     "edge_colors": grafo.es['color'],
     "vertex_label": grafo.vs["label"],
-    "vertex_color": grafo.vs["color"]
+    "vertex_color": grafo.vs["color"],
+    "mark_groups":True
 }
 
-plot(grafo, "rede_com_comunidades.pdf", **visual_style)
+plot(comunidades, "rede_com_comunidades.pdf", **visual_style)
+
+grafo.get_vertex_dataframe().to_csv('grafo_vertices.csv')
+
+# Criar um dicionário para mapear os índices dos vértices para os IDs dos grupos
+indice_para_grupo = {i: vertice['name'] for i, vertice in enumerate(grafo.vs)}
+
+# Criar um DataFrame para armazenar os resultados das comunidades
+df_comunidades = pd.DataFrame(columns=['Comunidade', 'ID do Grupo', 'Cor da Comunidade'])
+
+# Preencher o DataFrame com os resultados das comunidades
+for i, comunidade in enumerate(comunidades):
+    cor_comunidade = visual_style['vertex_color'][comunidade[0]]
+    for indice_vertice in comunidade:
+        id_grupo = indice_para_grupo[indice_vertice]
+        df_comunidades = df_comunidades.append({'Comunidade': i, 'ID do Grupo': id_grupo, 'Cor da Comunidade': cor_comunidade}, ignore_index=True)
+
+# Salvar o DataFrame em um arquivo CSV
+df_comunidades.to_csv('comunidades.csv', index=False)
