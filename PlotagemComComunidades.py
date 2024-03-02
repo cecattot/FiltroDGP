@@ -4,6 +4,8 @@ from itertools import combinations
 from igraph import *
 import pandas as pd
 import roman
+import random
+random.seed(42)  # Definindo a semente aleatória
 
 # Carregar os dados
 df = pd.read_csv('pesquisadores.csv')
@@ -35,6 +37,7 @@ algarismos_romanos = [roman.toRoman(i+1) for i in range(len(grupo_para_vertice))
 for grupo_id, vertice_id in grupo_para_vertice.items():
     tamanho_grupo = pesquisadores_por_grupo[grupo_id]
     grafo.add_vertex(name=str(grupo_id), label=algarismos_romanos[vertice_id], size=tamanho_grupo)
+
 # Criar um conjunto de pares de grupos que compartilham pesquisadores
 pares_de_grupos_compartilhados = set()
 for pesquisador in grupos_por_pesquisadores.values():
@@ -42,10 +45,19 @@ for pesquisador in grupos_por_pesquisadores.values():
         for par in combinations(pesquisador, 2):
             pares_de_grupos_compartilhados.add(par)
 
+# Criar um dicionário para rastrear a contagem de pares de grupos compartilhados
+contagem_pares = {}
+
 # Adicionar arestas entre os grupos que compartilham pesquisadores com cores correspondentes
 for grupo1, grupo2 in pares_de_grupos_compartilhados:
-    grafo.add_edge(str(grupo1[0]), str(grupo2[0]), color=cores[grupo1[1]])
+    par = tuple(sorted([grupo1[0], grupo2[0]]))  # Ordenar o par para garantir consistência
+    if par in contagem_pares:
+        contagem_pares[par] += 1
+    else:
+        contagem_pares[par] = 1
 
+    peso = contagem_pares[par]
+    grafo.add_edge(str(grupo1[0]), str(grupo2[0]), color=cores[grupo1[1]], weight=peso)
 
 # Adicionar atributo "Campus" aos vértices
 for index, row in dfGrupos.iterrows():
@@ -54,8 +66,7 @@ for index, row in dfGrupos.iterrows():
     vertice = grafo.vs.find(name=str(grupo_id))
     vertice['campus'] = campus
 
-
-# Definir cores aleatórias para os demais campi
+# Definir cores para os campi
 # Lista de cores disponíveis em hexadecimal
 cores_disponiveis = ["#FF5733", "#FFBD33", "#FF3385", "#33FF57", "#33B0FF",
                      "#B033FF", "#33FFBD", "#FF33E9", "#33FFA8", "#A833FF",
@@ -99,12 +110,15 @@ visual_style = {
     "bbox": (1600, 1600),
     "margin": 40,
     "edge_colors": grafo.es['color'],
+    "edge_width": grafo.es['weight'],
     "vertex_label": grafo.vs["label"],
     "vertex_color": grafo.vs["color"],
     "mark_groups":True
 }
 
 plot(comunidades, "rede_com_comunidades.pdf", **visual_style)
+
+plot(comunidades, "rede_com_comunidades_legenda.pdf", **visual_style, edge_label= grafo.es['weight'])
 
 grafo.get_vertex_dataframe().to_csv('grafo_vertices.csv')
 grafo.get_edge_dataframe().to_csv('grafo_arestas.csv')
