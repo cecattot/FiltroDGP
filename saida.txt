@@ -1,0 +1,5 @@
+Numero de arestas:126
+Numero de vertices:80
+Reciprocidade:1.0
+Assortatividade:0.014193405865135265
+Transitividade Media:0.33480375180375177

@@ -131,13 +131,31 @@ communities_data = []
 
 # Populate the list with community data
 for i, community in enumerate(comunidades):
-    cor_comunidade = visual_style['vertex_color'][community[0]]
     for indice_vertice in community:
         id_grupo = indice_para_grupo[indice_vertice]
-        communities_data.append({'Comunidade': i, 'ID do Grupo': id_grupo, 'Cor da Comunidade': cor_comunidade})
+        communities_data.append({'Comunidade': i, 'ID do Grupo': id_grupo, 'label': algarismos_romanos[indice_vertice]})
 
 # Convert the list of dictionaries into a DataFrame
 df_comunidades = pd.DataFrame(communities_data)
 
 # Save the DataFrame to a CSV file
 df_comunidades.to_csv('comunidades.csv', index=False)
+
+arq = open('saida.txt', 'w')
+
+vertices = grafo.vcount()
+arestas = grafo.ecount()
+reciprocidade = grafo.reciprocity()
+assortatividade = grafo.assortativity_degree()
+mediatrans = grafo.transitivity_avglocal_undirected()
+
+arq.write("Numero de arestas:")
+arq.write(str(arestas))
+arq.write("\nNumero de vertices:")
+arq.write(str(vertices))
+arq.write("\nReciprocidade:")
+arq.write(str(reciprocidade))
+arq.write("\nAssortatividade:")
+arq.write(str(assortatividade))
+arq.write("\nTransitividade Media:")
+arq.write(str(mediatrans))
